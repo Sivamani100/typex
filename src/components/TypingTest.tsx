@@ -246,8 +246,13 @@ export const TypingTest = () => {
   }, [started, typed, words, secondsElapsed]);
 
   return (
-    <div className="min-h-screen w-full bg-background flex flex-col">
-      <div className="w-full flex-1 flex flex-col px-6 sm:px-14 pt-8 pb-0 max-w-[1400px] mx-auto">
+    <div className="min-h-screen w-full bg-background flex flex-col relative overflow-hidden">
+      {/* Premium ambient backdrop */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-0">
+        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute bottom-[-200px] right-[-100px] w-[600px] h-[600px] rounded-full bg-primary/5 blur-3xl" />
+      </div>
+      <div className="relative z-10 w-full flex-1 flex flex-col px-6 sm:px-14 pt-8 pb-0 max-w-[1400px] mx-auto">
         {/* Header */}
         <header className="flex items-center justify-between">
           <div className="leading-tight">
