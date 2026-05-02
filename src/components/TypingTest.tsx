@@ -363,9 +363,6 @@ export const TypingTest = () => {
       {/* Header - Fixed at top - Draggable in Electron */}
       <header className="w-full px-6 sm:px-14 pt-10 pb-4 max-w-[1400px] mx-auto shrink-0 flex items-center justify-between [zoom:1] [-webkit-app-region:drag] relative">
         <div className="flex items-center gap-4 [-webkit-app-region:no-drag]">
-          <div className="w-10 h-10 rounded-xl liquid-glass flex items-center justify-center overflow-hidden p-1.5 group hover:scale-110 transition-all duration-500 shadow-lg shadow-primary/10">
-            <img src="/icon.svg" alt="Typex Logo" className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(33,255,18,0.4)]" />
-          </div>
           <div className="leading-tight">
             <div className="text-2xl sm:text-3xl font-medium tracking-tight text-foreground">
               Typex
