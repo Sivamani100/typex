@@ -8,10 +8,10 @@ const Practice = () => {
         {/* Header */}
         <header className="flex items-center justify-between">
           <div className="leading-tight">
-            <div className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
+            <div className="text-2xl sm:text-3xl font-medium tracking-tight text-foreground">
               Typex
             </div>
-            <div className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] text-primary mt-0.5">
+            <div className="text-[11px] sm:text-xs font-medium tracking-[0.18em] text-primary mt-0.5">
               Practice Mode
             </div>
           </div>
