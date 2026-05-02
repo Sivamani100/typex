@@ -24,7 +24,7 @@ const WORD_POOL = [
   "during", "both", "must",
 ];
 
-const TEST_WORD_COUNT = 72;
+const TEST_WORD_COUNT = 90;
 const TIMER_SECONDS = 60;
 
 function generateWords(count = TEST_WORD_COUNT) {
@@ -106,7 +106,7 @@ export const TypingTest = () => {
   const [typed, setTyped] = useState<string>("");
   const [started, setStarted] = useState(false);
   const [finished, setFinished] = useState(false);
-  const [secondsLeft, setSecondsLeft] = useState(TIMER_SECONDS);
+  const [secondsElapsed, setSecondsElapsed] = useState(0);
   const [stats, setStats] = useState<Stats | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
@@ -120,33 +120,32 @@ export const TypingTest = () => {
   const finishTest = useCallback((finalTyped: string) => {
     const elapsed = startTimeRef.current
       ? Math.max(1, Math.round((Date.now() - startTimeRef.current) / 1000))
-      : TIMER_SECONDS - secondsLeft;
+      : Math.max(1, secondsElapsed);
     const s = computeStats(words, finalTyped, elapsed);
     setStats(s);
     setFinished(true);
-    // scroll results into view
     setTimeout(() => {
       resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 80);
-  }, [words, secondsLeft]);
+  }, [words, secondsElapsed]);
 
-  // timer
+  // timer — counts up from 00 to TIMER_SECONDS
   useEffect(() => {
     if (!started || finished) return;
-    if (secondsLeft <= 0) {
+    if (secondsElapsed >= TIMER_SECONDS) {
       finishTest(typed);
       return;
     }
-    const id = window.setTimeout(() => setSecondsLeft((s) => s - 1), 1000);
+    const id = window.setTimeout(() => setSecondsElapsed((s) => s + 1), 1000);
     return () => window.clearTimeout(id);
-  }, [started, finished, secondsLeft, finishTest, typed]);
+  }, [started, finished, secondsElapsed, finishTest, typed]);
 
   const reset = useCallback((newWords = true) => {
     if (newWords) setWords(generateWords());
     setTyped("");
     setStarted(false);
     setFinished(false);
-    setSecondsLeft(TIMER_SECONDS);
+    setSecondsElapsed(0);
     setStats(null);
     startTimeRef.current = null;
     setTimeout(() => inputRef.current?.focus(), 0);
@@ -302,7 +301,7 @@ export const TypingTest = () => {
 
         {/* Words */}
         <div
-          className="mt-8 sm:mt-12 mx-auto w-full max-w-[820px] cursor-text select-none"
+          className="mt-8 sm:mt-12 mx-auto w-full max-w-[1100px] cursor-text select-none"
           onClick={() => inputRef.current?.focus()}
         >
           <p className={cn(
