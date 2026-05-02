@@ -22,12 +22,9 @@ const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL'];
 
 function createWindow() {
   win = new BrowserWindow({
-    icon: path.join(process.env.VITE_PUBLIC, 'favicon.ico'),
+    icon: path.join(process.env.VITE_PUBLIC, 'icon.svg'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.mjs'),
-      // Warning: Enable nodeIntegration and disable contextIsolation is not secure in production
-      // Consider using contextBridge.exposeInMainWorld
-      // Read more on https://www.electronjs.org/docs/latest/tutorial/context-isolation
       nodeIntegration: true,
       contextIsolation: true,
     },
@@ -39,14 +36,6 @@ function createWindow() {
     autoHideMenuBar: true,
     backgroundColor: '#080808',
   });
-
-  // Window Controls IPC
-  ipcMain.on('window-minimize', () => win?.minimize());
-  ipcMain.on('window-maximize', () => {
-    if (win?.isMaximized()) win.unmaximize();
-    else win?.maximize();
-  });
-  ipcMain.on('window-close', () => win?.close());
 
   // Test active push message to Renderer-process.
   win.webContents.on('did-finish-load', () => {
@@ -60,6 +49,14 @@ function createWindow() {
     win.loadFile(path.join(process.env.DIST, 'index.html'));
   }
 }
+
+// Window Controls IPC
+ipcMain.on('window-minimize', () => win?.minimize());
+ipcMain.on('window-maximize', () => {
+  if (win?.isMaximized()) win.unmaximize();
+  else win?.maximize();
+});
+ipcMain.on('window-close', () => win?.close());
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
