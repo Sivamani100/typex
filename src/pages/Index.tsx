@@ -3,7 +3,7 @@ import TypingTest from "@/components/TypingTest";
 const Index = () => {
   return (
     <>
-      <h1 className="sr-only">Centerville Typing Test — Practice Typing Online</h1>
+      <h1 className="sr-only">Typex — Online Typing Test for Speed and Accuracy</h1>
       <TypingTest />
     </>
   );
