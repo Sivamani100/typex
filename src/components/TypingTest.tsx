@@ -233,7 +233,7 @@ export const TypingTest = () => {
     });
   }, [words, typedWords, currentIndex, finished]);
 
-  const timerDisplay = String(secondsLeft).padStart(2, "0");
+  const timerDisplay = String(secondsElapsed).padStart(2, "0");
 
   // live WPM (updates while typing)
   const liveWpm = useMemo(() => {
@@ -241,10 +241,9 @@ export const TypingTest = () => {
     const elapsed = startTimeRef.current
       ? Math.max(1, (Date.now() - (startTimeRef.current ?? Date.now())) / 1000)
       : 1;
-    // Re-derive from current typed/words quickly
     const live = computeStats(words, typed, Math.max(1, Math.round(elapsed)));
     return live.wpm;
-  }, [started, typed, words, secondsLeft]);
+  }, [started, typed, words, secondsElapsed]);
 
   return (
     <div className="min-h-screen w-full bg-background flex flex-col">
