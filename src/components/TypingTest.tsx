@@ -253,10 +253,10 @@ export const TypingTest = () => {
         {/* Header */}
         <header className="flex items-center justify-between">
           <div className="leading-tight">
-            <div className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
+            <div className="text-2xl sm:text-3xl font-medium tracking-tight text-foreground">
               Typex
             </div>
-            <div className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] text-primary mt-0.5">
+            <div className="text-[11px] sm:text-xs font-medium tracking-[0.18em] text-primary mt-0.5">
               Typing Test
             </div>
           </div>
@@ -286,7 +286,7 @@ export const TypingTest = () => {
             <div className="text-[11px] tracking-[0.32em] text-muted-foreground font-medium">
               TIMER
             </div>
-            <div className="mt-3 text-5xl sm:text-6xl font-light text-muted-foreground/70 tabular-nums">
+            <div className="mt-3 text-5xl sm:text-6xl font-medium text-muted-foreground/70 tabular-nums">
               {timerDisplay}
             </div>
           </div>
@@ -294,7 +294,7 @@ export const TypingTest = () => {
             <div className="text-[11px] tracking-[0.32em] text-primary font-medium">
               WPM
             </div>
-            <div className="mt-3 text-5xl sm:text-6xl font-light text-primary/90 tabular-nums">
+            <div className="mt-3 text-5xl sm:text-6xl font-medium text-primary/90 tabular-nums">
               {String(liveWpm).padStart(2, "0")}
             </div>
           </div>
@@ -306,7 +306,7 @@ export const TypingTest = () => {
           onClick={() => inputRef.current?.focus()}
         >
           <p className={cn(
-            "text-2xl sm:text-[26px] leading-[2.1rem] sm:leading-[2.4rem] font-normal text-word-pending",
+            "text-2xl sm:text-[26px] leading-[2.1rem] sm:leading-[2.4rem] font-medium text-word-pending",
             finished && "opacity-60",
           )}>
             {renderedWords}
@@ -356,7 +356,7 @@ export const TypingTest = () => {
           >
             <div className="flex items-center justify-center gap-3 mb-8">
               <Trophy className="w-6 h-6 text-primary" />
-              <h2 className="text-2xl sm:text-3xl font-semibold text-foreground">Test Results</h2>
+              <h2 className="text-2xl sm:text-3xl font-medium text-foreground">Test Results</h2>
             </div>
 
             {/* Big WPM + Accuracy */}
@@ -366,7 +366,7 @@ export const TypingTest = () => {
                   <Zap className="w-4 h-4" />
                   Words / Min
                 </div>
-                <div className="mt-3 text-5xl sm:text-7xl font-semibold tabular-nums text-foreground">
+                <div className="mt-3 text-5xl sm:text-7xl font-medium tabular-nums text-foreground">
                   {stats.wpm}
                 </div>
                 <div className="mt-1 text-xs font-medium text-muted-foreground">
@@ -378,7 +378,7 @@ export const TypingTest = () => {
                   <Target className="w-4 h-4" />
                   Accuracy
                 </div>
-                <div className="mt-3 text-5xl sm:text-7xl font-semibold tabular-nums text-foreground">
+                <div className="mt-3 text-5xl sm:text-7xl font-medium tabular-nums text-foreground">
                   {stats.accuracy}%
                 </div>
                 <div className="mt-1 text-xs font-medium text-muted-foreground">
@@ -453,7 +453,7 @@ const PlainStat = ({
       {icon}
       {label}
     </div>
-    <div className="mt-1.5 text-2xl font-semibold tabular-nums text-foreground">{value}</div>
+    <div className="mt-1.5 text-2xl font-medium tabular-nums text-foreground">{value}</div>
   </div>
 );
 
