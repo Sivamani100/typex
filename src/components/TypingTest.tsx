@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { Home, RotateCw, Copyright, GitBranch, Calendar, ShieldCheck, Zap, Target, CheckCircle2, XCircle, Clock, Trophy } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -235,47 +236,67 @@ export const TypingTest = () => {
 
   const timerDisplay = String(secondsLeft).padStart(2, "0");
 
+  // live WPM (updates while typing)
+  const liveWpm = useMemo(() => {
+    if (!started) return 0;
+    const elapsed = startTimeRef.current
+      ? Math.max(1, (Date.now() - (startTimeRef.current ?? Date.now())) / 1000)
+      : 1;
+    // Re-derive from current typed/words quickly
+    const live = computeStats(words, typed, Math.max(1, Math.round(elapsed)));
+    return live.wpm;
+  }, [started, typed, words, secondsLeft]);
+
   return (
     <div className="min-h-screen w-full bg-background flex flex-col">
       <div className="w-full flex-1 flex flex-col px-6 sm:px-14 pt-8 pb-0 max-w-[1400px] mx-auto">
         {/* Header */}
         <header className="flex items-center justify-between">
           <div className="leading-tight">
-            <div className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
+            <div className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
               Typex
             </div>
-            <div className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] text-primary mt-0.5">
+            <div className="text-[11px] sm:text-xs font-bold tracking-[0.18em] text-primary mt-0.5">
               Typing Test
             </div>
           </div>
 
           <nav className="flex items-center gap-6">
-            <button
-              type="button"
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              onClick={() => reset(true)}
+            <Link
+              to="/practice"
+              className="text-sm font-bold text-muted-foreground hover:text-foreground transition-colors"
             >
               Practice Mode
-            </button>
-            <button
-              type="button"
+            </Link>
+            <Link
+              to="/"
               className="flex items-center gap-2 px-4 py-2 rounded-full
-                         bg-secondary/70 text-primary text-sm font-medium
+                         bg-secondary/70 text-primary text-sm font-bold
                          hover:bg-secondary transition-colors"
             >
               <Home className="w-4 h-4" />
               Home
-            </button>
+            </Link>
           </nav>
         </header>
 
-        {/* Timer */}
-        <div className="mt-12 sm:mt-16 flex flex-col items-center">
-          <div className="text-[11px] tracking-[0.32em] text-muted-foreground font-medium">
-            TIMER
+        {/* Timer + Live WPM */}
+        <div className="mt-12 sm:mt-16 flex items-start justify-center gap-16 sm:gap-24">
+          <div className="flex flex-col items-center">
+            <div className="text-[11px] tracking-[0.32em] text-muted-foreground font-bold">
+              TIMER
+            </div>
+            <div className="mt-3 text-5xl sm:text-6xl font-bold text-muted-foreground/80 tabular-nums">
+              {timerDisplay}
+            </div>
           </div>
-          <div className="mt-3 text-5xl sm:text-6xl font-light text-muted-foreground/70 tabular-nums">
-            {timerDisplay}
+          <div className="flex flex-col items-center">
+            <div className="text-[11px] tracking-[0.32em] text-primary font-bold">
+              WPM
+            </div>
+            <div className="mt-3 text-5xl sm:text-6xl font-bold text-primary tabular-nums">
+              {String(liveWpm).padStart(2, "0")}
+            </div>
           </div>
         </div>
 
@@ -285,7 +306,7 @@ export const TypingTest = () => {
           onClick={() => inputRef.current?.focus()}
         >
           <p className={cn(
-            "text-2xl sm:text-[26px] leading-[2.1rem] sm:leading-[2.4rem] font-normal text-word-pending",
+            "text-2xl sm:text-[26px] leading-[2.1rem] sm:leading-[2.4rem] font-bold text-word-pending",
             finished && "opacity-60",
           )}>
             {renderedWords}
@@ -315,7 +336,7 @@ export const TypingTest = () => {
             className="flex items-center gap-3 text-foreground/90 hover:text-foreground transition-colors"
           >
             <RotateCw className="w-5 h-5 text-warning" />
-            <span className="text-base">Start Over</span>
+            <span className="text-base font-bold">Start Over</span>
           </button>
           <button
             type="button"
@@ -323,98 +344,85 @@ export const TypingTest = () => {
             className="flex items-center gap-3 text-foreground/90 hover:text-foreground transition-colors"
           >
             <Zap className="w-5 h-5 text-primary" />
-            <span className="text-base">New Test</span>
+            <span className="text-base font-bold">New Test</span>
           </button>
         </div>
 
-        {/* RESULTS PANEL */}
+        {/* RESULTS — plain, no card layout */}
         {finished && stats && (
           <section
             ref={resultsRef}
             className="mt-14 mx-auto w-full max-w-[1100px] animate-in fade-in slide-in-from-bottom-4 duration-500"
           >
-            <div className="rounded-2xl border border-border/60 bg-secondary/30 p-6 sm:p-10">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-full bg-primary/15 text-primary flex items-center justify-center">
-                  <Trophy className="w-5 h-5" />
-                </div>
-                <div>
-                  <h2 className="text-xl sm:text-2xl font-semibold text-foreground">Test Results</h2>
-                  <p className="text-xs text-muted-foreground">Here's how you performed</p>
-                </div>
-              </div>
+            <div className="flex items-center justify-center gap-3 mb-8">
+              <Trophy className="w-6 h-6 text-primary" />
+              <h2 className="text-2xl sm:text-3xl font-bold text-foreground">Test Results</h2>
+            </div>
 
-              {/* Big WPM + Accuracy */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                <StatBig
-                  icon={<Zap className="w-5 h-5" />}
-                  label="Words per minute"
-                  value={stats.wpm.toString()}
-                  hint={`Raw: ${stats.rawWpm} WPM`}
-                  accent="primary"
-                />
-                <StatBig
-                  icon={<Target className="w-5 h-5" />}
-                  label="Accuracy"
-                  value={`${stats.accuracy}%`}
-                  hint={`${stats.correctWords}/${stats.totalWords} words correct`}
-                  accent="primary"
-                />
-              </div>
-
-              {/* Detailed metrics */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                <StatSmall
-                  icon={<CheckCircle2 className="w-4 h-4 text-word-correct" />}
-                  label="Correct chars"
-                  value={stats.correctChars.toString()}
-                />
-                <StatSmall
-                  icon={<XCircle className="w-4 h-4 text-word-incorrect" />}
-                  label="Incorrect chars"
-                  value={stats.incorrectChars.toString()}
-                />
-                <StatSmall
-                  icon={<Clock className="w-4 h-4 text-warning" />}
-                  label="Time"
-                  value={`${stats.timeSeconds}s`}
-                />
-                <StatSmall
-                  icon={<Zap className="w-4 h-4 text-primary" />}
-                  label="Total chars"
-                  value={stats.totalChars.toString()}
-                />
-              </div>
-
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                <button
-                  type="button"
-                  onClick={() => reset(true)}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full
-                             bg-primary text-primary-foreground text-sm font-semibold
-                             hover:bg-primary/90 transition-colors"
-                >
+            {/* Big WPM + Accuracy */}
+            <div className="grid grid-cols-2 gap-10 sm:gap-20 text-center mb-10">
+              <div>
+                <div className="flex items-center justify-center gap-2 text-primary text-xs uppercase tracking-[0.22em] font-bold">
                   <Zap className="w-4 h-4" />
-                  Start a new test
-                </button>
-                <button
-                  type="button"
-                  onClick={() => reset(false)}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full
-                             bg-secondary text-foreground text-sm font-medium
-                             hover:bg-secondary/80 transition-colors"
-                >
-                  <RotateCw className="w-4 h-4" />
-                  Retry same words
-                </button>
+                  Words / Min
+                </div>
+                <div className="mt-3 text-5xl sm:text-7xl font-bold tabular-nums text-foreground">
+                  {stats.wpm}
+                </div>
+                <div className="mt-1 text-xs font-bold text-muted-foreground">
+                  Raw: {stats.rawWpm} WPM
+                </div>
               </div>
+              <div>
+                <div className="flex items-center justify-center gap-2 text-primary text-xs uppercase tracking-[0.22em] font-bold">
+                  <Target className="w-4 h-4" />
+                  Accuracy
+                </div>
+                <div className="mt-3 text-5xl sm:text-7xl font-bold tabular-nums text-foreground">
+                  {stats.accuracy}%
+                </div>
+                <div className="mt-1 text-xs font-bold text-muted-foreground">
+                  {stats.correctWords}/{stats.totalWords} words correct
+                </div>
+              </div>
+            </div>
+
+            {/* Detailed metrics — plain row, no boxes */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+              <PlainStat icon={<CheckCircle2 className="w-4 h-4 text-word-correct" />} label="Correct chars" value={stats.correctChars.toString()} />
+              <PlainStat icon={<XCircle className="w-4 h-4 text-word-incorrect" />} label="Incorrect chars" value={stats.incorrectChars.toString()} />
+              <PlainStat icon={<Clock className="w-4 h-4 text-warning" />} label="Time" value={`${stats.timeSeconds}s`} />
+              <PlainStat icon={<Zap className="w-4 h-4 text-primary" />} label="Total chars" value={stats.totalChars.toString()} />
+            </div>
+
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+              <button
+                type="button"
+                onClick={() => reset(true)}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full
+                           bg-primary text-primary-foreground text-sm font-bold
+                           hover:bg-primary/90 transition-colors"
+              >
+                <Zap className="w-4 h-4" />
+                Start a new test
+              </button>
+              <button
+                type="button"
+                onClick={() => reset(false)}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full
+                           bg-secondary text-foreground text-sm font-bold
+                           hover:bg-secondary/80 transition-colors"
+              >
+                <RotateCw className="w-4 h-4" />
+                Retry same words
+              </button>
             </div>
           </section>
         )}
 
         <div className="flex-1 min-h-[40px] sm:min-h-[80px]" />
 
-        <footer className="mt-10 border-t border-border/60 py-5 grid grid-cols-2 md:grid-cols-4 gap-y-3 gap-x-6 text-xs text-muted-foreground">
+        <footer className="mt-10 border-t border-border/60 py-5 grid grid-cols-2 md:grid-cols-4 gap-y-3 gap-x-6 text-xs font-bold text-muted-foreground">
           <div className="flex items-center gap-2">
             <Copyright className="w-4 h-4" />
             <span>Copyright @ Typex</span>
@@ -437,30 +445,15 @@ export const TypingTest = () => {
   );
 };
 
-const StatBig = ({
-  icon, label, value, hint,
-}: { icon: React.ReactNode; label: string; value: string; hint?: string; accent?: string }) => (
-  <div className="rounded-xl border border-border/60 bg-card p-5 sm:p-6">
-    <div className="flex items-center gap-2 text-muted-foreground text-xs uppercase tracking-[0.18em]">
-      <span className="text-primary">{icon}</span>
-      {label}
-    </div>
-    <div className="mt-2 text-4xl sm:text-5xl font-semibold tabular-nums text-foreground">
-      {value}
-    </div>
-    {hint && <div className="mt-1 text-xs text-muted-foreground">{hint}</div>}
-  </div>
-);
-
-const StatSmall = ({
+const PlainStat = ({
   icon, label, value,
 }: { icon: React.ReactNode; label: string; value: string }) => (
-  <div className="rounded-lg border border-border/50 bg-card/60 p-4">
-    <div className="flex items-center gap-2 text-[11px] uppercase tracking-wider text-muted-foreground">
+  <div className="flex flex-col items-center">
+    <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] font-bold text-muted-foreground">
       {icon}
       {label}
     </div>
-    <div className="mt-1.5 text-xl font-semibold tabular-nums text-foreground">{value}</div>
+    <div className="mt-1.5 text-2xl font-bold tabular-nums text-foreground">{value}</div>
   </div>
 );
 
