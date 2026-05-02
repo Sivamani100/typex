@@ -286,7 +286,7 @@ export const TypingTest = () => {
             <div className="text-[11px] tracking-[0.32em] text-muted-foreground font-medium">
               TIMER
             </div>
-            <div className="mt-3 text-5xl sm:text-6xl font-medium text-muted-foreground/80 tabular-nums">
+            <div className="mt-3 text-5xl sm:text-6xl font-light text-muted-foreground/70 tabular-nums">
               {timerDisplay}
             </div>
           </div>
@@ -294,7 +294,7 @@ export const TypingTest = () => {
             <div className="text-[11px] tracking-[0.32em] text-primary font-medium">
               WPM
             </div>
-            <div className="mt-3 text-5xl sm:text-6xl font-medium text-primary tabular-nums">
+            <div className="mt-3 text-5xl sm:text-6xl font-light text-primary/90 tabular-nums">
               {String(liveWpm).padStart(2, "0")}
             </div>
           </div>
@@ -306,7 +306,7 @@ export const TypingTest = () => {
           onClick={() => inputRef.current?.focus()}
         >
           <p className={cn(
-            "text-2xl sm:text-[26px] leading-[2.1rem] sm:leading-[2.4rem] font-medium text-word-pending",
+            "text-2xl sm:text-[26px] leading-[2.1rem] sm:leading-[2.4rem] font-normal text-word-pending",
             finished && "opacity-60",
           )}>
             {renderedWords}
