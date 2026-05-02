@@ -253,10 +253,10 @@ export const TypingTest = () => {
         {/* Header */}
         <header className="flex items-center justify-between">
           <div className="leading-tight">
-            <div className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
+            <div className="text-2xl sm:text-3xl font-medium tracking-tight text-foreground">
               Typex
             </div>
-            <div className="text-[11px] sm:text-xs font-bold tracking-[0.18em] text-primary mt-0.5">
+            <div className="text-[11px] sm:text-xs font-medium tracking-[0.18em] text-primary mt-0.5">
               Typing Test
             </div>
           </div>
@@ -264,14 +264,14 @@ export const TypingTest = () => {
           <nav className="flex items-center gap-6">
             <Link
               to="/practice"
-              className="text-sm font-bold text-muted-foreground hover:text-foreground transition-colors"
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
               Practice Mode
             </Link>
             <Link
               to="/"
               className="flex items-center gap-2 px-4 py-2 rounded-full
-                         bg-secondary/70 text-primary text-sm font-bold
+                         bg-secondary/70 text-primary text-sm font-medium
                          hover:bg-secondary transition-colors"
             >
               <Home className="w-4 h-4" />
@@ -283,18 +283,18 @@ export const TypingTest = () => {
         {/* Timer + Live WPM */}
         <div className="mt-12 sm:mt-16 flex items-start justify-center gap-16 sm:gap-24">
           <div className="flex flex-col items-center">
-            <div className="text-[11px] tracking-[0.32em] text-muted-foreground font-bold">
+            <div className="text-[11px] tracking-[0.32em] text-muted-foreground font-medium">
               TIMER
             </div>
-            <div className="mt-3 text-5xl sm:text-6xl font-bold text-muted-foreground/80 tabular-nums">
+            <div className="mt-3 text-5xl sm:text-6xl font-medium text-muted-foreground/80 tabular-nums">
               {timerDisplay}
             </div>
           </div>
           <div className="flex flex-col items-center">
-            <div className="text-[11px] tracking-[0.32em] text-primary font-bold">
+            <div className="text-[11px] tracking-[0.32em] text-primary font-medium">
               WPM
             </div>
-            <div className="mt-3 text-5xl sm:text-6xl font-bold text-primary tabular-nums">
+            <div className="mt-3 text-5xl sm:text-6xl font-medium text-primary tabular-nums">
               {String(liveWpm).padStart(2, "0")}
             </div>
           </div>
@@ -306,7 +306,7 @@ export const TypingTest = () => {
           onClick={() => inputRef.current?.focus()}
         >
           <p className={cn(
-            "text-2xl sm:text-[26px] leading-[2.1rem] sm:leading-[2.4rem] font-bold text-word-pending",
+            "text-2xl sm:text-[26px] leading-[2.1rem] sm:leading-[2.4rem] font-medium text-word-pending",
             finished && "opacity-60",
           )}>
             {renderedWords}
@@ -336,7 +336,7 @@ export const TypingTest = () => {
             className="flex items-center gap-3 text-foreground/90 hover:text-foreground transition-colors"
           >
             <RotateCw className="w-5 h-5 text-warning" />
-            <span className="text-base font-bold">Start Over</span>
+            <span className="text-base font-medium">Start Over</span>
           </button>
           <button
             type="button"
@@ -344,7 +344,7 @@ export const TypingTest = () => {
             className="flex items-center gap-3 text-foreground/90 hover:text-foreground transition-colors"
           >
             <Zap className="w-5 h-5 text-primary" />
-            <span className="text-base font-bold">New Test</span>
+            <span className="text-base font-medium">New Test</span>
           </button>
         </div>
 
@@ -356,32 +356,32 @@ export const TypingTest = () => {
           >
             <div className="flex items-center justify-center gap-3 mb-8">
               <Trophy className="w-6 h-6 text-primary" />
-              <h2 className="text-2xl sm:text-3xl font-bold text-foreground">Test Results</h2>
+              <h2 className="text-2xl sm:text-3xl font-medium text-foreground">Test Results</h2>
             </div>
 
             {/* Big WPM + Accuracy */}
             <div className="grid grid-cols-2 gap-10 sm:gap-20 text-center mb-10">
               <div>
-                <div className="flex items-center justify-center gap-2 text-primary text-xs uppercase tracking-[0.22em] font-bold">
+                <div className="flex items-center justify-center gap-2 text-primary text-xs uppercase tracking-[0.22em] font-medium">
                   <Zap className="w-4 h-4" />
                   Words / Min
                 </div>
-                <div className="mt-3 text-5xl sm:text-7xl font-bold tabular-nums text-foreground">
+                <div className="mt-3 text-5xl sm:text-7xl font-medium tabular-nums text-foreground">
                   {stats.wpm}
                 </div>
-                <div className="mt-1 text-xs font-bold text-muted-foreground">
+                <div className="mt-1 text-xs font-medium text-muted-foreground">
                   Raw: {stats.rawWpm} WPM
                 </div>
               </div>
               <div>
-                <div className="flex items-center justify-center gap-2 text-primary text-xs uppercase tracking-[0.22em] font-bold">
+                <div className="flex items-center justify-center gap-2 text-primary text-xs uppercase tracking-[0.22em] font-medium">
                   <Target className="w-4 h-4" />
                   Accuracy
                 </div>
-                <div className="mt-3 text-5xl sm:text-7xl font-bold tabular-nums text-foreground">
+                <div className="mt-3 text-5xl sm:text-7xl font-medium tabular-nums text-foreground">
                   {stats.accuracy}%
                 </div>
-                <div className="mt-1 text-xs font-bold text-muted-foreground">
+                <div className="mt-1 text-xs font-medium text-muted-foreground">
                   {stats.correctWords}/{stats.totalWords} words correct
                 </div>
               </div>
@@ -400,7 +400,7 @@ export const TypingTest = () => {
                 type="button"
                 onClick={() => reset(true)}
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full
-                           bg-primary text-primary-foreground text-sm font-bold
+                           bg-primary text-primary-foreground text-sm font-medium
                            hover:bg-primary/90 transition-colors"
               >
                 <Zap className="w-4 h-4" />
@@ -410,7 +410,7 @@ export const TypingTest = () => {
                 type="button"
                 onClick={() => reset(false)}
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full
-                           bg-secondary text-foreground text-sm font-bold
+                           bg-secondary text-foreground text-sm font-medium
                            hover:bg-secondary/80 transition-colors"
               >
                 <RotateCw className="w-4 h-4" />
@@ -422,7 +422,7 @@ export const TypingTest = () => {
 
         <div className="flex-1 min-h-[40px] sm:min-h-[80px]" />
 
-        <footer className="mt-10 border-t border-border/60 py-5 grid grid-cols-2 md:grid-cols-4 gap-y-3 gap-x-6 text-xs font-bold text-muted-foreground">
+        <footer className="mt-10 border-t border-border/60 py-5 grid grid-cols-2 md:grid-cols-4 gap-y-3 gap-x-6 text-xs font-medium text-muted-foreground">
           <div className="flex items-center gap-2">
             <Copyright className="w-4 h-4" />
             <span>Copyright @ Typex</span>
@@ -449,11 +449,11 @@ const PlainStat = ({
   icon, label, value,
 }: { icon: React.ReactNode; label: string; value: string }) => (
   <div className="flex flex-col items-center">
-    <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] font-bold text-muted-foreground">
+    <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] font-medium text-muted-foreground">
       {icon}
       {label}
     </div>
-    <div className="mt-1.5 text-2xl font-bold tabular-nums text-foreground">{value}</div>
+    <div className="mt-1.5 text-2xl font-medium tabular-nums text-foreground">{value}</div>
   </div>
 );
 
