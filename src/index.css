@@ -130,14 +130,15 @@
 
 @layer components {
   .glass {
-    @apply backdrop-blur-md transition-all duration-300;
-    background: hsla(var(--background) / 0.5);
-    border: 1px solid hsla(var(--foreground) / 0.1);
+    @apply backdrop-blur-xl transition-all duration-500;
+    background: hsla(0, 0%, 100%, 0.03);
+    border: 1px solid hsla(0, 0%, 100%, 0.08);
+    box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.2);
   }
 
   [data-theme="light"] .glass {
-    background: hsla(0, 0%, 100%, 0.6);
-    border: 1px solid hsla(0, 0%, 0%, 0.1);
+    background: hsla(0, 0%, 0%, 0.03);
+    border: 1px solid hsla(0, 0%, 0%, 0.08);
     box-shadow: 0 8px 32px 0 hsla(0, 0%, 0%, 0.05);
   }
 
@@ -149,6 +150,21 @@
     vertical-align: middle;
     margin-left: 2px;
     animation: caret-blink 1s steps(2, start) infinite;
+  }
+
+  .liquid-glass {
+    background: hsla(0, 0%, 100%, 0.03);
+    backdrop-filter: blur(20px) saturate(200%);
+    -webkit-backdrop-filter: blur(20px) saturate(200%);
+    border: 1px solid hsla(0, 0%, 100%, 0.08);
+    box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .liquid-glass:hover {
+    background: hsla(0, 0%, 100%, 0.08);
+    border: 1px solid hsla(0, 0%, 100%, 0.15);
+    box-shadow: 0 8px 32px -1px rgba(0, 0, 0, 0.3);
   }
 }
 

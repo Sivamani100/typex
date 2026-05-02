@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Home, RotateCw, Copyright, GitBranch, Calendar, ShieldCheck, Zap, Target, CheckCircle2, XCircle, Clock, Trophy, Palette, Volume2, VolumeX, Keyboard } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "./ThemeToggle";
+import WindowControls from "./WindowControls";
 
 // Audio Context for the typing sounds
 let audioCtx: AudioContext | null = null;
@@ -353,17 +354,22 @@ export const TypingTest = () => {
     const live = computeStats(words, typed, Math.max(1, Math.round(elapsed)));
     return live.wpm;
   }, [started, typed, words, secondsElapsed]);
-
   return (
     <div className="h-screen w-full bg-transparent flex flex-col overflow-hidden">
+      <WindowControls />
       {/* Header - Fixed at top - Draggable in Electron */}
-      <header className="w-full px-6 sm:px-14 pt-8 pb-4 max-w-[1400px] mx-auto shrink-0 flex items-center justify-between [zoom:1] [-webkit-app-region:drag]">
-        <div className="leading-tight [-webkit-app-region:no-drag]">
-          <div className="text-2xl sm:text-3xl font-medium tracking-tight text-foreground">
-            Typex
+      <header className="w-full px-6 sm:px-14 pt-10 pb-4 max-w-[1400px] mx-auto shrink-0 flex items-center justify-between [zoom:1] [-webkit-app-region:drag]">
+        <div className="flex items-center gap-4 [-webkit-app-region:no-drag]">
+          <div className="w-10 h-10 rounded-xl liquid-glass flex items-center justify-center overflow-hidden p-1.5 group hover:scale-105 transition-transform">
+            <img src="/icon.svg" alt="Typex Logo" className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(33,255,18,0.3)]" />
           </div>
-          <div className="text-[11px] sm:text-xs font-medium tracking-[0.18em] text-primary mt-0.5 uppercase">
-            Typing Test
+          <div className="leading-tight">
+            <div className="text-2xl sm:text-3xl font-medium tracking-tight text-foreground">
+              Typex
+            </div>
+            <div className="text-[11px] sm:text-xs font-medium tracking-[0.18em] text-primary mt-0.5 uppercase">
+              Typing Test
+            </div>
           </div>
         </div>
 

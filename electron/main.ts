@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -32,11 +32,6 @@ function createWindow() {
       contextIsolation: false,
     },
     titleBarStyle: 'hidden',
-    titleBarOverlay: {
-      color: '#080808',
-      symbolColor: '#747474',
-      height: 32
-    },
     width: 1280,
     height: 800,
     minWidth: 1000,
@@ -44,6 +39,14 @@ function createWindow() {
     autoHideMenuBar: true,
     backgroundColor: '#080808',
   });
+
+  // Window Controls IPC
+  ipcMain.on('window-minimize', () => win?.minimize());
+  ipcMain.on('window-maximize', () => {
+    if (win?.isMaximized()) win.unmaximize();
+    else win?.maximize();
+  });
+  ipcMain.on('window-close', () => win?.close());
 
   // Test active push message to Renderer-process.
   win.webContents.on('did-finish-load', () => {
