@@ -24,7 +24,7 @@ const WORD_POOL = [
   "during", "both", "must",
 ];
 
-const TEST_WORD_COUNT = 75;
+const TEST_WORD_COUNT = 72;
 const TIMER_SECONDS = 60;
 
 function generateWords(count = TEST_WORD_COUNT) {
@@ -302,11 +302,11 @@ export const TypingTest = () => {
 
         {/* Words */}
         <div
-          className="mt-8 sm:mt-12 mx-auto w-full max-w-[900px] cursor-text select-none"
+          className="mt-8 sm:mt-12 mx-auto w-full max-w-[820px] cursor-text select-none"
           onClick={() => inputRef.current?.focus()}
         >
           <p className={cn(
-            "text-2xl sm:text-[26px] leading-[2.1rem] sm:leading-[2.4rem] font-medium text-word-pending",
+            "text-2xl sm:text-[26px] leading-[2.1rem] sm:leading-[2.4rem] font-normal text-word-pending",
             finished && "opacity-60",
           )}>
             {renderedWords}
