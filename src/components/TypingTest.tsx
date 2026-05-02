@@ -236,47 +236,67 @@ export const TypingTest = () => {
 
   const timerDisplay = String(secondsLeft).padStart(2, "0");
 
+  // live WPM (updates while typing)
+  const liveWpm = useMemo(() => {
+    if (!started) return 0;
+    const elapsed = startTimeRef.current
+      ? Math.max(1, (Date.now() - (startTimeRef.current ?? Date.now())) / 1000)
+      : 1;
+    // Re-derive from current typed/words quickly
+    const live = computeStats(words, typed, Math.max(1, Math.round(elapsed)));
+    return live.wpm;
+  }, [started, typed, words, secondsLeft]);
+
   return (
     <div className="min-h-screen w-full bg-background flex flex-col">
       <div className="w-full flex-1 flex flex-col px-6 sm:px-14 pt-8 pb-0 max-w-[1400px] mx-auto">
         {/* Header */}
         <header className="flex items-center justify-between">
           <div className="leading-tight">
-            <div className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
+            <div className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
               Typex
             </div>
-            <div className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] text-primary mt-0.5">
+            <div className="text-[11px] sm:text-xs font-bold tracking-[0.18em] text-primary mt-0.5">
               Typing Test
             </div>
           </div>
 
           <nav className="flex items-center gap-6">
-            <button
-              type="button"
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              onClick={() => reset(true)}
+            <Link
+              to="/practice"
+              className="text-sm font-bold text-muted-foreground hover:text-foreground transition-colors"
             >
               Practice Mode
-            </button>
-            <button
-              type="button"
+            </Link>
+            <Link
+              to="/"
               className="flex items-center gap-2 px-4 py-2 rounded-full
-                         bg-secondary/70 text-primary text-sm font-medium
+                         bg-secondary/70 text-primary text-sm font-bold
                          hover:bg-secondary transition-colors"
             >
               <Home className="w-4 h-4" />
               Home
-            </button>
+            </Link>
           </nav>
         </header>
 
-        {/* Timer */}
-        <div className="mt-12 sm:mt-16 flex flex-col items-center">
-          <div className="text-[11px] tracking-[0.32em] text-muted-foreground font-medium">
-            TIMER
+        {/* Timer + Live WPM */}
+        <div className="mt-12 sm:mt-16 flex items-start justify-center gap-16 sm:gap-24">
+          <div className="flex flex-col items-center">
+            <div className="text-[11px] tracking-[0.32em] text-muted-foreground font-bold">
+              TIMER
+            </div>
+            <div className="mt-3 text-5xl sm:text-6xl font-bold text-muted-foreground/80 tabular-nums">
+              {timerDisplay}
+            </div>
           </div>
-          <div className="mt-3 text-5xl sm:text-6xl font-light text-muted-foreground/70 tabular-nums">
-            {timerDisplay}
+          <div className="flex flex-col items-center">
+            <div className="text-[11px] tracking-[0.32em] text-primary font-bold">
+              WPM
+            </div>
+            <div className="mt-3 text-5xl sm:text-6xl font-bold text-primary tabular-nums">
+              {String(liveWpm).padStart(2, "0")}
+            </div>
           </div>
         </div>
 
