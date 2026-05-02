@@ -8,6 +8,8 @@
 
 @layer base {
   :root {
+    /* ... existing tokens ... */
+    --bg-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1964&auto=format&fit=crop');
     /* Dark surface (the card) */
     --background: 0 0% 8%;            /* #141414-ish dark card */
     --foreground: 0 0% 92%;
@@ -63,6 +65,19 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+
+  [data-theme="light"] {
+    --background: 0 0% 98%;
+    --foreground: 0 0% 10%;
+    --page: 0 0% 100%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+    --muted: 0 0% 95%;
+    --muted-foreground: 0 0% 40%;
+    --border: 0 0% 90%;
+    --word-pending: 0 0% 60%;
+    --caret: 0 0% 10%;
+  }
 }
 
 @layer base {
@@ -75,15 +90,57 @@
   }
 
   body {
-    @apply text-foreground;
+    @apply text-foreground transition-colors duration-300;
     background-color: hsl(var(--background));
+    background-image: 
+      linear-gradient(to bottom, var(--bg-overlay, hsla(0, 0%, 5%, 0.85)), var(--bg-overlay, hsla(0, 0%, 5%, 0.85))),
+      var(--bg-image);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
     font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  [data-theme="light"] body {
+    --bg-overlay: hsla(0, 0%, 100%, 0.9);
+  }
+
+  /* Custom Premium Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsla(var(--primary) / 0.15);
+    border-radius: 20px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    transition: background 0.3s ease;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsla(var(--primary) / 0.4);
+    background-clip: padding-box;
+  }
 }
 
 @layer components {
+  .glass {
+    @apply backdrop-blur-md transition-all duration-300;
+    background: hsla(var(--background) / 0.5);
+    border: 1px solid hsla(var(--foreground) / 0.1);
+  }
+
+  [data-theme="light"] .glass {
+    background: hsla(0, 0%, 100%, 0.6);
+    border: 1px solid hsla(0, 0%, 0%, 0.1);
+    box-shadow: 0 8px 32px 0 hsla(0, 0%, 0%, 0.05);
+  }
+
   .typing-caret {
     display: inline-block;
     width: 1px;
