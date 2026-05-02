@@ -105,7 +105,7 @@
         "portable",
         "nsis"
       ],
-      "icon": "public/icon.svg"
+      "icon": "public/icon.png"
     }
   }
 }
