@@ -8,10 +8,10 @@ const Practice = () => {
         {/* Header */}
         <header className="flex items-center justify-between">
           <div className="leading-tight">
-            <div className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
+            <div className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
               Typex
             </div>
-            <div className="text-[11px] sm:text-xs font-bold tracking-[0.18em] text-primary mt-0.5">
+            <div className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] text-primary mt-0.5">
               Practice Mode
             </div>
           </div>
@@ -20,7 +20,7 @@ const Practice = () => {
             <Link
               to="/"
               className="flex items-center gap-2 px-4 py-2 rounded-full
-                         bg-secondary/70 text-primary text-sm font-bold
+                         bg-secondary/70 text-primary text-sm font-medium
                          hover:bg-secondary transition-colors"
             >
               <Home className="w-4 h-4" />
@@ -31,11 +31,11 @@ const Practice = () => {
 
         {/* Hero */}
         <section className="mt-14 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-wider uppercase">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium tracking-wider uppercase">
             <Keyboard className="w-3.5 h-3.5" />
             Practice Playground
           </div>
-          <h1 className="mt-4 text-3xl sm:text-5xl font-bold tracking-tight text-foreground">
+          <h1 className="mt-4 text-3xl sm:text-5xl font-medium tracking-tight text-foreground">
             Learn how to type — fast & accurate
           </h1>
           <p className="mt-3 text-base sm:text-lg text-muted-foreground font-medium max-w-2xl mx-auto">
@@ -65,7 +65,7 @@ const Practice = () => {
 
         {/* Drill rows */}
         <section className="mt-12">
-          <h2 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
+          <h2 className="text-xl font-medium text-foreground mb-4 flex items-center gap-2">
             <BookOpen className="w-5 h-5 text-primary" />
             Warm-up Drills
           </h2>
@@ -82,7 +82,7 @@ const Practice = () => {
           <Link
             to="/"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full
-                       bg-primary text-primary-foreground text-sm font-bold
+                       bg-primary text-primary-foreground text-sm font-medium
                        hover:bg-primary/90 transition-colors"
           >
             <Zap className="w-4 h-4" />
@@ -99,17 +99,17 @@ const TipCard = ({ icon, title, body }: { icon: React.ReactNode; title: string; 
     <div className="w-9 h-9 rounded-full bg-primary/15 text-primary flex items-center justify-center">
       {icon}
     </div>
-    <h3 className="mt-3 text-base font-bold text-foreground">{title}</h3>
+    <h3 className="mt-3 text-base font-medium text-foreground">{title}</h3>
     <p className="mt-1 text-sm text-muted-foreground font-medium">{body}</p>
   </div>
 );
 
 const DrillRow = ({ label, text }: { label: string; text: string }) => (
   <div className="rounded-lg border border-border/50 bg-card/60 p-4 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
-    <div className="text-[11px] uppercase tracking-[0.18em] font-bold text-primary sm:w-32 shrink-0">
+    <div className="text-[11px] uppercase tracking-[0.18em] font-medium text-primary sm:w-32 shrink-0">
       {label}
     </div>
-    <code className="text-sm sm:text-base font-bold text-foreground tracking-wide font-mono">
+    <code className="text-sm sm:text-base font-medium text-foreground tracking-wide font-mono">
       {text}
     </code>
   </div>
