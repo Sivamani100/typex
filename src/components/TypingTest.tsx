@@ -24,7 +24,7 @@ const WORD_POOL = [
   "during", "both", "must",
 ];
 
-const TEST_WORD_COUNT = 90;
+const TEST_WORD_COUNT = 72;
 const TIMER_SECONDS = 60;
 
 function generateWords(count = TEST_WORD_COUNT) {
@@ -106,7 +106,7 @@ export const TypingTest = () => {
   const [typed, setTyped] = useState<string>("");
   const [started, setStarted] = useState(false);
   const [finished, setFinished] = useState(false);
-  const [secondsElapsed, setSecondsElapsed] = useState(0);
+  const [secondsLeft, setSecondsLeft] = useState(TIMER_SECONDS);
   const [stats, setStats] = useState<Stats | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
@@ -120,32 +120,33 @@ export const TypingTest = () => {
   const finishTest = useCallback((finalTyped: string) => {
     const elapsed = startTimeRef.current
       ? Math.max(1, Math.round((Date.now() - startTimeRef.current) / 1000))
-      : Math.max(1, secondsElapsed);
+      : TIMER_SECONDS - secondsLeft;
     const s = computeStats(words, finalTyped, elapsed);
     setStats(s);
     setFinished(true);
+    // scroll results into view
     setTimeout(() => {
       resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 80);
-  }, [words, secondsElapsed]);
+  }, [words, secondsLeft]);
 
-  // timer — counts up from 00 to TIMER_SECONDS
+  // timer
   useEffect(() => {
     if (!started || finished) return;
-    if (secondsElapsed >= TIMER_SECONDS) {
+    if (secondsLeft <= 0) {
       finishTest(typed);
       return;
     }
-    const id = window.setTimeout(() => setSecondsElapsed((s) => s + 1), 1000);
+    const id = window.setTimeout(() => setSecondsLeft((s) => s - 1), 1000);
     return () => window.clearTimeout(id);
-  }, [started, finished, secondsElapsed, finishTest, typed]);
+  }, [started, finished, secondsLeft, finishTest, typed]);
 
   const reset = useCallback((newWords = true) => {
     if (newWords) setWords(generateWords());
     setTyped("");
     setStarted(false);
     setFinished(false);
-    setSecondsElapsed(0);
+    setSecondsLeft(TIMER_SECONDS);
     setStats(null);
     startTimeRef.current = null;
     setTimeout(() => inputRef.current?.focus(), 0);
@@ -233,7 +234,7 @@ export const TypingTest = () => {
     });
   }, [words, typedWords, currentIndex, finished]);
 
-  const timerDisplay = String(secondsElapsed).padStart(2, "0");
+  const timerDisplay = String(secondsLeft).padStart(2, "0");
 
   // live WPM (updates while typing)
   const liveWpm = useMemo(() => {
@@ -241,18 +242,14 @@ export const TypingTest = () => {
     const elapsed = startTimeRef.current
       ? Math.max(1, (Date.now() - (startTimeRef.current ?? Date.now())) / 1000)
       : 1;
+    // Re-derive from current typed/words quickly
     const live = computeStats(words, typed, Math.max(1, Math.round(elapsed)));
     return live.wpm;
-  }, [started, typed, words, secondsElapsed]);
+  }, [started, typed, words, secondsLeft]);
 
   return (
-    <div className="min-h-screen w-full bg-background flex flex-col relative overflow-hidden">
-      {/* Premium ambient backdrop */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-0">
-        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full bg-primary/10 blur-3xl" />
-        <div className="absolute bottom-[-200px] right-[-100px] w-[600px] h-[600px] rounded-full bg-primary/5 blur-3xl" />
-      </div>
-      <div className="relative z-10 w-full flex-1 flex flex-col px-6 sm:px-14 pt-8 pb-0 max-w-[1400px] mx-auto">
+    <div className="min-h-screen w-full bg-background flex flex-col">
+      <div className="w-full flex-1 flex flex-col px-6 sm:px-14 pt-8 pb-0 max-w-[1400px] mx-auto">
         {/* Header */}
         <header className="flex items-center justify-between">
           <div className="leading-tight">
@@ -305,7 +302,7 @@ export const TypingTest = () => {
 
         {/* Words */}
         <div
-          className="mt-8 sm:mt-12 mx-auto w-full max-w-[1100px] cursor-text select-none"
+          className="mt-8 sm:mt-12 mx-auto w-full max-w-[820px] cursor-text select-none"
           onClick={() => inputRef.current?.focus()}
         >
           <p className={cn(
