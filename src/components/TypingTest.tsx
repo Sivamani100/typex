@@ -24,7 +24,7 @@ const WORD_POOL = [
   "during", "both", "must",
 ];
 
-const TEST_WORD_COUNT = 50;
+const TEST_WORD_COUNT = 75;
 const TIMER_SECONDS = 60;
 
 function generateWords(count = TEST_WORD_COUNT) {
@@ -352,7 +352,7 @@ export const TypingTest = () => {
         {finished && stats && (
           <section
             ref={resultsRef}
-            className="mt-14 mx-auto w-full max-w-[1100px] animate-in fade-in slide-in-from-bottom-4 duration-500"
+            className="mt-14 mx-auto w-full max-w-[760px] animate-in fade-in slide-in-from-bottom-4 duration-500"
           >
             <div className="flex items-center justify-center gap-3 mb-6">
               <Trophy className="w-5 h-5 text-primary" />
