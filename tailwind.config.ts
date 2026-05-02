@@ -47,6 +47,13 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        page: "hsl(var(--page))",
+        warning: "hsl(var(--warning))",
+        word: {
+          pending: "hsl(var(--word-pending))",
+          correct: "hsl(var(--word-correct))",
+          incorrect: "hsl(var(--word-incorrect))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
