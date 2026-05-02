@@ -155,3 +155,11 @@
 @keyframes caret-blink {
   to { visibility: hidden; }
 }
+
+/* Electron Window Controls & Draggable Area */
+@media (min-width: 0px) {
+  /* Make sure buttons and links are not draggable */
+  button, a, input, [role="button"], .no-drag {
+    -webkit-app-region: no-drag;
+  }
+}

@@ -356,9 +356,9 @@ export const TypingTest = () => {
 
   return (
     <div className="h-screen w-full bg-transparent flex flex-col overflow-hidden">
-      {/* Header - Fixed at top */}
-      <header className="w-full px-6 sm:px-14 pt-8 pb-4 max-w-[1400px] mx-auto shrink-0 flex items-center justify-between">
-        <div className="leading-tight">
+      {/* Header - Fixed at top - Draggable in Electron */}
+      <header className="w-full px-6 sm:px-14 pt-8 pb-4 max-w-[1400px] mx-auto shrink-0 flex items-center justify-between [zoom:1] [-webkit-app-region:drag]">
+        <div className="leading-tight [-webkit-app-region:no-drag]">
           <div className="text-2xl sm:text-3xl font-medium tracking-tight text-foreground">
             Typex
           </div>
@@ -367,7 +367,7 @@ export const TypingTest = () => {
           </div>
         </div>
 
-        <nav className="flex items-center gap-2 sm:gap-3">
+        <nav className="flex items-center gap-2 sm:gap-3 [-webkit-app-region:no-drag]">
           <button
             onClick={() => setSoundEnabled(!soundEnabled)}
             className="p-2 rounded-full glass hover:bg-white/10 transition-colors text-foreground/70 hover:text-primary"

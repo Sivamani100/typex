@@ -31,13 +31,18 @@ function createWindow() {
       nodeIntegration: true,
       contextIsolation: false,
     },
-    title: 'Typex — Typing Test',
+    titleBarStyle: 'hidden',
+    titleBarOverlay: {
+      color: '#080808',
+      symbolColor: '#747474',
+      height: 32
+    },
     width: 1280,
     height: 800,
     minWidth: 1000,
     minHeight: 600,
     autoHideMenuBar: true,
-    backgroundColor: '#0a0a0a',
+    backgroundColor: '#080808',
   });
 
   // Test active push message to Renderer-process.
