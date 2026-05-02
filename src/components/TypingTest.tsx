@@ -354,41 +354,43 @@ export const TypingTest = () => {
             ref={resultsRef}
             className="mt-14 mx-auto w-full max-w-[1100px] animate-in fade-in slide-in-from-bottom-4 duration-500"
           >
-            <div className="flex items-center justify-center gap-3 mb-8">
-              <Trophy className="w-6 h-6 text-primary" />
-              <h2 className="text-2xl sm:text-3xl font-medium text-foreground">Test Results</h2>
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <Trophy className="w-5 h-5 text-primary" />
+              <h2 className="text-xl sm:text-2xl font-medium text-foreground">Test Results</h2>
             </div>
 
-            {/* Big WPM + Accuracy */}
-            <div className="grid grid-cols-2 gap-10 sm:gap-20 text-center mb-10">
-              <div>
-                <div className="flex items-center justify-center gap-2 text-primary text-xs uppercase tracking-[0.22em] font-medium">
-                  <Zap className="w-4 h-4" />
-                  Words / Min
+            {/* Big WPM + Accuracy — bordered card */}
+            <div className="rounded-2xl border border-border/60 bg-card/30 p-6 sm:p-8 mb-5">
+              <div className="grid grid-cols-2 gap-8 sm:gap-16 text-center">
+                <div>
+                  <div className="flex items-center justify-center gap-2 text-primary text-xs uppercase tracking-[0.22em] font-medium">
+                    <Zap className="w-4 h-4" />
+                    Words / Min
+                  </div>
+                  <div className="mt-1.5 text-4xl sm:text-5xl font-medium tabular-nums text-foreground">
+                    {stats.wpm}
+                  </div>
+                  <div className="mt-0.5 text-xs font-medium text-muted-foreground">
+                    Raw: {stats.rawWpm} WPM
+                  </div>
                 </div>
-                <div className="mt-3 text-5xl sm:text-7xl font-medium tabular-nums text-foreground">
-                  {stats.wpm}
-                </div>
-                <div className="mt-1 text-xs font-medium text-muted-foreground">
-                  Raw: {stats.rawWpm} WPM
-                </div>
-              </div>
-              <div>
-                <div className="flex items-center justify-center gap-2 text-primary text-xs uppercase tracking-[0.22em] font-medium">
-                  <Target className="w-4 h-4" />
-                  Accuracy
-                </div>
-                <div className="mt-3 text-5xl sm:text-7xl font-medium tabular-nums text-foreground">
-                  {stats.accuracy}%
-                </div>
-                <div className="mt-1 text-xs font-medium text-muted-foreground">
-                  {stats.correctWords}/{stats.totalWords} words correct
+                <div>
+                  <div className="flex items-center justify-center gap-2 text-primary text-xs uppercase tracking-[0.22em] font-medium">
+                    <Target className="w-4 h-4" />
+                    Accuracy
+                  </div>
+                  <div className="mt-1.5 text-4xl sm:text-5xl font-medium tabular-nums text-foreground">
+                    {stats.accuracy}%
+                  </div>
+                  <div className="mt-0.5 text-xs font-medium text-muted-foreground">
+                    {stats.correctWords}/{stats.totalWords} words correct
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Detailed metrics — plain row, no boxes */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+            {/* Detailed metrics — bordered card */}
+            <div className="rounded-2xl border border-border/60 bg-card/30 p-5 sm:p-6 grid grid-cols-2 sm:grid-cols-4 gap-5 text-center">
               <PlainStat icon={<CheckCircle2 className="w-4 h-4 text-word-correct" />} label="Correct chars" value={stats.correctChars.toString()} />
               <PlainStat icon={<XCircle className="w-4 h-4 text-word-incorrect" />} label="Incorrect chars" value={stats.incorrectChars.toString()} />
               <PlainStat icon={<Clock className="w-4 h-4 text-warning" />} label="Time" value={`${stats.timeSeconds}s`} />
