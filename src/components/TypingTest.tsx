@@ -356,7 +356,7 @@ export const TypingTest = () => {
           >
             <div className="flex items-center justify-center gap-3 mb-8">
               <Trophy className="w-6 h-6 text-primary" />
-              <h2 className="text-2xl sm:text-3xl font-medium text-foreground">Test Results</h2>
+              <h2 className="text-2xl sm:text-3xl font-semibold text-foreground">Test Results</h2>
             </div>
 
             {/* Big WPM + Accuracy */}
@@ -366,7 +366,7 @@ export const TypingTest = () => {
                   <Zap className="w-4 h-4" />
                   Words / Min
                 </div>
-                <div className="mt-3 text-5xl sm:text-7xl font-medium tabular-nums text-foreground">
+                <div className="mt-3 text-5xl sm:text-7xl font-semibold tabular-nums text-foreground">
                   {stats.wpm}
                 </div>
                 <div className="mt-1 text-xs font-medium text-muted-foreground">
@@ -378,7 +378,7 @@ export const TypingTest = () => {
                   <Target className="w-4 h-4" />
                   Accuracy
                 </div>
-                <div className="mt-3 text-5xl sm:text-7xl font-medium tabular-nums text-foreground">
+                <div className="mt-3 text-5xl sm:text-7xl font-semibold tabular-nums text-foreground">
                   {stats.accuracy}%
                 </div>
                 <div className="mt-1 text-xs font-medium text-muted-foreground">
@@ -453,7 +453,7 @@ const PlainStat = ({
       {icon}
       {label}
     </div>
-    <div className="mt-1.5 text-2xl font-medium tabular-nums text-foreground">{value}</div>
+    <div className="mt-1.5 text-2xl font-semibold tabular-nums text-foreground">{value}</div>
   </div>
 );
 
