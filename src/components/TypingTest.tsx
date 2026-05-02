@@ -134,12 +134,8 @@ export const TypingTest = () => {
   const timerDisplay = String(secondsLeft).padStart(2, "0");
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center px-4 py-10 sm:py-14">
-      <div
-        className="w-full max-w-[1180px] bg-card rounded-2xl border border-border/40
-                   px-8 sm:px-14 pt-8 pb-0 flex flex-col"
-        style={{ boxShadow: "var(--shadow-card)" }}
-      >
+    <div className="min-h-screen w-full bg-background flex flex-col">
+      <div className="w-full flex-1 flex flex-col px-6 sm:px-14 pt-8 pb-0 max-w-[1400px] mx-auto">
         <header className="flex items-center justify-between">
           <div className="leading-tight">
             <div className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">

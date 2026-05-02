@@ -76,7 +76,7 @@
 
   body {
     @apply text-foreground;
-    background-color: hsl(var(--page));
+    background-color: hsl(var(--background));
     font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
