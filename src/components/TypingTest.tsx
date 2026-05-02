@@ -355,14 +355,14 @@ export const TypingTest = () => {
     return live.wpm;
   }, [started, typed, words, secondsElapsed]);
   return (
-    <div className="h-screen w-full bg-transparent flex flex-col overflow-hidden">
-      <WindowControls />
+    <div className="h-screen w-full bg-transparent flex flex-col overflow-hidden relative">
+      <div className="fixed top-4 right-6 sm:right-14 z-[99999] [-webkit-app-region:no-drag]">
+        <WindowControls />
+      </div>
+
       {/* Header - Fixed at top - Draggable in Electron */}
-      <header className="w-full px-6 sm:px-14 pt-10 pb-4 max-w-[1400px] mx-auto shrink-0 flex items-center justify-between [zoom:1] [-webkit-app-region:drag]">
+      <header className="w-full px-6 sm:px-14 pt-10 pb-4 max-w-[1400px] mx-auto shrink-0 flex items-center justify-between [zoom:1] [-webkit-app-region:drag] relative">
         <div className="flex items-center gap-4 [-webkit-app-region:no-drag]">
-          <div className="w-10 h-10 rounded-xl liquid-glass flex items-center justify-center overflow-hidden p-1.5 group hover:scale-105 transition-transform">
-            <img src="/icon.svg" alt="Typex Logo" className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(33,255,18,0.3)]" />
-          </div>
           <div className="leading-tight">
             <div className="text-2xl sm:text-3xl font-medium tracking-tight text-foreground">
               Typex
@@ -373,7 +373,7 @@ export const TypingTest = () => {
           </div>
         </div>
 
-        <nav className="flex items-center gap-2 sm:gap-3 [-webkit-app-region:no-drag]">
+        <nav className="flex items-center gap-2 sm:gap-3 [-webkit-app-region:no-drag] mr-32">
           <button
             onClick={() => setSoundEnabled(!soundEnabled)}
             className="p-2 rounded-full glass hover:bg-white/10 transition-colors text-foreground/70 hover:text-primary"
