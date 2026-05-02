@@ -15,7 +15,7 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react(),
-    electron({
+    !process.env.VERCEL && electron({
       main: {
         // Shortcut of `build.lib.entry`.
         entry: 'electron/main.ts',
@@ -31,6 +31,9 @@ export default defineConfig(({ mode }) => ({
     }),
     mode === "development" && componentTagger()
   ].filter(Boolean),
+  define: {
+    'process.env.IS_ELECTRON': process.env.VERCEL ? 'false' : 'true',
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
