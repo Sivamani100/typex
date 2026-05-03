@@ -3,6 +3,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import WindowControls from "@/components/WindowControls";
+import MetaTags, { createBreadcrumbSchema } from "@/seo/MetaTags";
 
 // Audio Context for the typing sounds
 let audioCtx: AudioContext | null = null;
@@ -120,8 +121,24 @@ const Practice = () => {
     setStartTime(null);
     setWpm(0);
   };
+
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Practice", url: "/practice" },
+  ]);
+
   return (
-    <div className="h-screen w-full bg-transparent flex flex-col overflow-hidden relative" onKeyDown={handleKeyDown} tabIndex={0}>
+    <>
+      <MetaTags
+        title="Practice Mode — Improve Your Typing Skills | Typex"
+        description="Practice typing with structured drills for home row, top row, bottom row, and common words. Free typing exercises to boost your WPM."
+        canonical="/practice"
+        ogTitle="Practice Mode — Improve Your Typing Skills | Typex"
+        ogDescription="Practice typing with structured drills for home row, top row, bottom row, and common words. Free typing exercises to boost your WPM."
+        ogUrl="/practice"
+        jsonLd={breadcrumbSchema}
+      />
+      <div className="h-screen w-full bg-transparent flex flex-col overflow-hidden relative" onKeyDown={handleKeyDown} tabIndex={0}>
       <div className="fixed top-4 right-6 sm:right-14 z-[99999] [-webkit-app-region:no-drag]">
         <WindowControls />
       </div>
@@ -340,6 +357,7 @@ const Practice = () => {
         </div>
       </footer>
     </div>
+    </>
   );
 };
 

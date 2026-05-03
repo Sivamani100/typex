@@ -2,24 +2,56 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- TODO: Set the document title to the name of your application -->
-    <title>Typex — Typing Test, Speed &amp; Accuracy Practice</title>
-    <meta name="description" content="Typex is a fast, minimal typing test. Measure your WPM, accuracy, correct and incorrect characters, then start a new test instantly." />
-    <meta name="author" content="Typex Team" />
-    <meta property="og:title" content="Typex — Premium Typing Experience" />
-    <meta property="og:description" content="Typex is a fast, minimal, and beautiful typing test platform designed for performance and aesthetics." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="/og-image.png" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#09090f" />
+
+    <!-- Performance: DNS Prefetch & Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+
+    <!-- Default Title (overridden by React Helmet) -->
+    <title>Typex — Free Typing Speed Test Online | Check Your WPM</title>
+    <meta name="description" content="Test your typing speed for free. Get your WPM and accuracy score in 60 seconds. The cleanest, fastest typing test online — no sign-up needed." />
+    <meta name="author" content="Typex Team" />
+    <meta name="keywords" content="typing test, wpm test, typing speed test, free typing test, online typing test, words per minute, typing practice, speed typing, keyboard test" />
+
+    <!-- Open Graph (overridden by React Helmet) -->
+    <meta property="og:title" content="Free Typing Speed Test — Check Your WPM Online | Typex" />
+    <meta property="og:description" content="Test your typing speed for free. Get your WPM and accuracy score in 60 seconds. The cleanest, fastest typing test online — no sign-up needed." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://typex.arkio.in/" />
+    <meta property="og:image" content="https://typex.arkio.in/og-image.png" />
+    <meta property="og:site_name" content="Typex" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card (overridden by React Helmet) -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Typex — Premium Typing Experience" />
-    <meta name="twitter:description" content="Typex is a fast, minimal, and beautiful typing test platform." />
-    <meta name="twitter:image" content="/og-image.png" />
+    <meta name="twitter:title" content="Free Typing Speed Test — Check Your WPM Online | Typex" />
+    <meta name="twitter:description" content="Test your typing speed for free. Get your WPM and accuracy score in 60 seconds. The cleanest, fastest typing test online — no sign-up needed." />
+    <meta name="twitter:image" content="https://typex.arkio.in/og-image.png" />
+
+    <!-- Hreflang -->
+    <link rel="alternate" href="https://typex.arkio.in/" hreflang="en" />
+    <link rel="alternate" href="https://typex.arkio.in/" hreflang="x-default" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://typex.arkio.in/" />
+
+    <!-- Robots -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
   </head>
 
   <body>
+    <!-- Skip to main content link for screen readers -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-lg">
+      Skip to main content
+    </a>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
