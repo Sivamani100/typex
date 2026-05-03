@@ -75,12 +75,16 @@ const Index = () => {
       />
       <h1 className="sr-only">Typex — Online Typing Test for Speed and Accuracy</h1>
       
-      {/* Side typing words decoration */}
-      <div className="fixed left-0 top-0 bottom-0 w-16 hidden lg:flex flex-col items-center justify-center pointer-events-none select-none z-0">
-        <SideTypingWords side="left" />
+      {/* Side Ads - Left */}
+      <div className="fixed left-4 top-1/2 -translate-y-1/2 hidden xl:flex flex-col gap-4 z-10">
+        <AdNetwork type="profitable-cpm-skyscraper" className="w-[160px] h-[300px]" />
+        <AdNetwork type="profitable-cpm-rectangle" className="w-[300px] h-[250px]" />
       </div>
-      <div className="fixed right-0 top-0 bottom-0 w-16 hidden lg:flex flex-col items-center justify-center pointer-events-none select-none z-0">
-        <SideTypingWords side="right" />
+      
+      {/* Side Ads - Right */}
+      <div className="fixed right-4 top-1/2 -translate-y-1/2 hidden xl:flex flex-col gap-4 z-10">
+        <AdNetwork type="profitable-cpm-rectangle" className="w-[300px] h-[250px]" />
+        <AdNetwork type="profitable-cpm-skyscraper" className="w-[160px] h-[300px]" />
       </div>
       
       <TypingTest />
@@ -225,38 +229,6 @@ const BlogLinksSection = () => {
         </Link>
       </div>
     </section>
-  );
-};
-
-// Side typing words decoration component
-const SideTypingWords = ({ side }: { side: "left" | "right" }) => {
-  const words = [
-    "speed", "typing", "fast", "words", "minute", "accuracy", "keyboard",
-    "practice", "improve", "skill", "test", "wpm", "letters", "fingers",
-    "touch", "type", "quick", "rapid", "swift", "fluent", "master"
-  ];
-  
-  // Different words for each side
-  const sideWords = side === "left" 
-    ? words.slice(0, 10) 
-    : words.slice(11, 21);
-  
-  return (
-    <div className="flex flex-col gap-3 opacity-10">
-      {sideWords.map((word, index) => (
-        <span 
-          key={index}
-          className="text-[10px] font-mono tracking-widest text-muted-foreground writing-mode-vertical"
-          style={{
-            writingMode: "vertical-rl",
-            textOrientation: "mixed",
-            transform: side === "left" ? "rotate(180deg)" : "none"
-          }}
-        >
-          {word}
-        </span>
-      ))}
-    </div>
   );
 };
 
