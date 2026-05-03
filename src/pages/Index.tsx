@@ -75,9 +75,12 @@ const Index = () => {
       />
       <h1 className="sr-only">Typex — Online Typing Test for Speed and Accuracy</h1>
       
-      {/* Top Banner Ad - Leaderboard */}
-      <div className="w-full flex justify-center py-4 px-4 min-h-[100px]">
-        <AdNetwork type="profitable-cpm-leaderboard" className="w-full max-w-[728px]" />
+      {/* Side typing words decoration */}
+      <div className="fixed left-0 top-0 bottom-0 w-16 hidden lg:flex flex-col items-center justify-center pointer-events-none select-none z-0">
+        <SideTypingWords side="left" />
+      </div>
+      <div className="fixed right-0 top-0 bottom-0 w-16 hidden lg:flex flex-col items-center justify-center pointer-events-none select-none z-0">
+        <SideTypingWords side="right" />
       </div>
       
       <TypingTest />
@@ -222,6 +225,38 @@ const BlogLinksSection = () => {
         </Link>
       </div>
     </section>
+  );
+};
+
+// Side typing words decoration component
+const SideTypingWords = ({ side }: { side: "left" | "right" }) => {
+  const words = [
+    "speed", "typing", "fast", "words", "minute", "accuracy", "keyboard",
+    "practice", "improve", "skill", "test", "wpm", "letters", "fingers",
+    "touch", "type", "quick", "rapid", "swift", "fluent", "master"
+  ];
+  
+  // Different words for each side
+  const sideWords = side === "left" 
+    ? words.slice(0, 10) 
+    : words.slice(11, 21);
+  
+  return (
+    <div className="flex flex-col gap-3 opacity-10">
+      {sideWords.map((word, index) => (
+        <span 
+          key={index}
+          className="text-[10px] font-mono tracking-widest text-muted-foreground writing-mode-vertical"
+          style={{
+            writingMode: "vertical-rl",
+            textOrientation: "mixed",
+            transform: side === "left" ? "rotate(180deg)" : "none"
+          }}
+        >
+          {word}
+        </span>
+      ))}
+    </div>
   );
 };
 
