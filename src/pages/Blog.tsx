@@ -4,7 +4,6 @@ import { BookOpen, Home, Clock, ArrowRight, User } from "lucide-react";
 import MetaTags, { createBreadcrumbSchema } from "@/seo/MetaTags";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import AdUnit from "@/components/AdUnit";
-import AdNetwork, { AdContainer } from "@/components/AdNetwork";
 import { getAllPosts, type BlogPost } from "@/blog/loader";
 
 const Blog = () => {
@@ -80,49 +79,18 @@ const Blog = () => {
               </p>
             </section>
 
-            {/* Top Banner Ad */}
-            <div className="flex justify-center mb-8">
-              <AdNetwork type="profitable-cpm-leaderboard" />
-            </div>
-
             {/* Blog Grid */}
             {loading ? (
               <div className="flex justify-center py-12">
                 <div className="animate-pulse text-muted-foreground">Loading articles...</div>
               </div>
             ) : (
-              <>
-                <section className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                  {posts.slice(0, 2).map((post) => (
-                    <BlogCard key={post.slug} post={post} />
-                  ))}
-                </section>
-                
-                {/* Mid-content Ad */}
-                <div className="flex justify-center mb-8">
-                  <AdNetwork type="profitable-cpm-banner" />
-                </div>
-                
-                <section className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                  {posts.slice(2).map((post) => (
-                    <BlogCard key={post.slug} post={post} />
-                  ))}
-                </section>
-              </>
+              <section className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                {posts.map((post) => (
+                  <BlogCard key={post.slug} post={post} />
+                ))}
+              </section>
             )}
-
-            {/* Ad Section with Multiple Formats */}
-            <div className="glass rounded-xl border border-white/5 p-6 mb-12">
-              <h3 className="text-sm font-medium text-center text-muted-foreground mb-4 uppercase tracking-wider">
-                Sponsored Content
-              </h3>
-              <div className="flex flex-wrap justify-center gap-6">
-                <AdContainer containerId="container-0bb4c5329cf485af7b48c6ba21661f31" />
-                <div className="hidden md:block">
-                  <AdNetwork type="profitable-cpm-rectangle" />
-                </div>
-              </div>
-            </div>
 
             {/* Ad Unit - Between content and CTA */}
             <div className="flex justify-center mb-12">

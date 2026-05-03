@@ -6,7 +6,6 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
-import { AdScriptLoader } from "@/components/AdNetwork";
 import Index from "./pages/Index.tsx";
 import Practice from "./pages/Practice.tsx";
 import About from "./pages/About.tsx";
@@ -35,7 +34,6 @@ const App = () => {
           <Toaster />
           <Sonner />
           <Router future={routerFutureConfig}>
-            <AdScriptLoader />
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/practice" element={<Practice />} />

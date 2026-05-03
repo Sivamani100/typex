@@ -7,7 +7,6 @@ import MetaTags, {
   createOrganizationSchema,
   createFAQSchema,
 } from "@/seo/MetaTags";
-import AdNetwork, { AdContainer, AdDirectLink } from "@/components/AdNetwork";
 
 const faqData = [
   {
@@ -74,67 +73,9 @@ const Index = () => {
         ]}
       />
       <h1 className="sr-only">Typex — Online Typing Test for Speed and Accuracy</h1>
-      
-      {/* Side Ads - Left */}
-      <div className="fixed left-4 top-1/2 -translate-y-1/2 hidden xl:flex flex-col gap-4 z-10">
-        <AdNetwork type="profitable-cpm-skyscraper" className="w-[160px] h-[300px]" />
-        <AdNetwork type="profitable-cpm-rectangle" className="w-[300px] h-[250px]" />
-      </div>
-      
-      {/* Side Ads - Right */}
-      <div className="fixed right-4 top-1/2 -translate-y-1/2 hidden xl:flex flex-col gap-4 z-10">
-        <AdNetwork type="profitable-cpm-rectangle" className="w-[300px] h-[250px]" />
-        <AdNetwork type="profitable-cpm-skyscraper" className="w-[160px] h-[300px]" />
-      </div>
-      
       <TypingTest />
-      
-      {/* Middle Ad Section */}
-      <section className="w-full max-w-[1200px] mx-auto px-6 sm:px-14 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Left Skyscraper */}
-          <div className="hidden md:flex justify-center min-h-[310px]">
-            <AdNetwork type="profitable-cpm-skyscraper" className="w-[160px] h-[300px]" />
-          </div>
-          
-          {/* Center Content */}
-          <div className="md:col-span-1 flex flex-col items-center gap-4">
-            <AdDirectLink />
-            <p className="text-xs text-muted-foreground/50 text-center">
-              Support Typex by checking out our partners
-            </p>
-          </div>
-          
-          {/* Right Skyscraper */}
-          <div className="hidden md:flex justify-center min-h-[260px]">
-            <AdNetwork type="profitable-cpm-rectangle" className="w-[300px] h-[250px]" />
-          </div>
-        </div>
-      </section>
-      
       <FAQSection />
-      
-      {/* FAQ Bottom Ad */}
-      <div className="w-full flex justify-center py-6 px-4 min-h-[80px]">
-        <AdNetwork type="profitable-cpm-banner" className="w-full max-w-[468px]" />
-      </div>
-      
       <BlogLinksSection />
-      
-      {/* Blog Section Ad */}
-      <section className="w-full max-w-[1000px] mx-auto px-6 sm:px-14 py-8">
-        <div className="glass rounded-xl border border-white/5 p-6">
-          <h3 className="text-lg font-medium text-center mb-4">Sponsored</h3>
-          <div className="flex flex-wrap justify-center gap-4 min-h-[260px]">
-            <AdContainer containerId="container-0bb4c5329cf485af7b48c6ba21661f31" className="w-[300px] h-[250px]" />
-          </div>
-        </div>
-      </section>
-      
-      {/* Bottom Mobile Banner */}
-      <div className="w-full flex justify-center py-4 px-4 md:hidden min-h-[60px]">
-        <AdNetwork type="profitable-cpm-mobile" className="w-full max-w-[320px]" />
-      </div>
     </>
   );
 };
