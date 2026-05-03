@@ -66,9 +66,30 @@ const AdNetwork = ({ type, className = "" }: AdNetworkProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    // Check for cookie consent
-    const consent = localStorage.getItem("cookieConsent");
-    setHasConsent(consent === "true");
+    // Check for cookie consent initially
+    const checkConsent = () => {
+      const consent = localStorage.getItem("cookieConsent");
+      setHasConsent(consent === "true");
+    };
+    
+    checkConsent();
+    
+    // Listen for storage changes (when user accepts cookies)
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === "cookieConsent") {
+        checkConsent();
+      }
+    };
+    
+    // Also check periodically for changes
+    const interval = setInterval(checkConsent, 1000);
+    
+    window.addEventListener("storage", handleStorageChange);
+    
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      clearInterval(interval);
+    };
   }, []);
 
   useEffect(() => {
@@ -183,8 +204,26 @@ export const AdContainer = ({
   const [hasConsent, setHasConsent] = useState(false);
 
   useEffect(() => {
-    const consent = localStorage.getItem("cookieConsent");
-    setHasConsent(consent === "true");
+    const checkConsent = () => {
+      const consent = localStorage.getItem("cookieConsent");
+      setHasConsent(consent === "true");
+    };
+    
+    checkConsent();
+    
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === "cookieConsent") {
+        checkConsent();
+      }
+    };
+    
+    const interval = setInterval(checkConsent, 1000);
+    window.addEventListener("storage", handleStorageChange);
+    
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      clearInterval(interval);
+    };
   }, []);
 
   const isDev = import.meta.env.DEV;
@@ -227,31 +266,51 @@ export const AdScriptLoader = () => {
   const scriptsLoaded = useRef(false);
 
   useEffect(() => {
-    const consent = localStorage.getItem("cookieConsent");
-    setHasConsent(consent === "true");
-
-    if (consent === "true" && !scriptsLoaded.current && !import.meta.env.DEV) {
-      scriptsLoaded.current = true;
+    const checkConsent = () => {
+      const consent = localStorage.getItem("cookieConsent");
+      setHasConsent(consent === "true");
       
-      // Load main profitablecpm script
-      const script1 = document.createElement("script");
-      script1.src = "https://pl29323279.profitablecpmratenetwork.com/71/3a/b0/713ab05330f74fd8faf1cdf84de23038.js";
-      script1.async = true;
-      document.body.appendChild(script1);
+      if (consent === "true" && !scriptsLoaded.current && !import.meta.env.DEV) {
+        scriptsLoaded.current = true;
+        
+        // Load main profitablecpm script
+        const script1 = document.createElement("script");
+        script1.src = "https://pl29323279.profitablecpmratenetwork.com/71/3a/b0/713ab05330f74fd8faf1cdf84de23038.js";
+        script1.async = true;
+        document.body.appendChild(script1);
 
-      // Load invoke script
-      const script2 = document.createElement("script");
-      script2.async = true;
-      script2.setAttribute("data-cfasync", "false");
-      script2.src = "https://pl29323280.profitablecpmratenetwork.com/0bb4c5329cf485af7b48c6ba21661f31/invoke.js";
-      document.body.appendChild(script2);
+        // Load invoke script
+        const script2 = document.createElement("script");
+        script2.async = true;
+        script2.setAttribute("data-cfasync", "false");
+        script2.src = "https://pl29323280.profitablecpmratenetwork.com/0bb4c5329cf485af7b48c6ba21661f31/invoke.js";
+        document.body.appendChild(script2);
 
-      // Load direct link script
-      const script3 = document.createElement("script");
-      script3.src = "https://pl29323282.profitablecpmratenetwork.com/6f/d5/82/6fd5822c3bbdced66f4470ccd7c95263.js";
-      script3.async = true;
-      document.body.appendChild(script3);
-    }
+        // Load direct link script
+        const script3 = document.createElement("script");
+        script3.src = "https://pl29323282.profitablecpmratenetwork.com/6f/d5/82/6fd5822c3bbdced66f4470ccd7c95263.js";
+        script3.async = true;
+        document.body.appendChild(script3);
+        
+        console.log("[AdScriptLoader] Ad scripts loaded");
+      }
+    };
+    
+    checkConsent();
+    
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === "cookieConsent") {
+        checkConsent();
+      }
+    };
+    
+    const interval = setInterval(checkConsent, 1000);
+    window.addEventListener("storage", handleStorageChange);
+    
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      clearInterval(interval);
+    };
   }, []);
 
   // This component renders nothing visible
@@ -263,8 +322,26 @@ export const AdDirectLink = ({ className = "" }: { className?: string }) => {
   const [hasConsent, setHasConsent] = useState(false);
 
   useEffect(() => {
-    const consent = localStorage.getItem("cookieConsent");
-    setHasConsent(consent === "true");
+    const checkConsent = () => {
+      const consent = localStorage.getItem("cookieConsent");
+      setHasConsent(consent === "true");
+    };
+    
+    checkConsent();
+    
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === "cookieConsent") {
+        checkConsent();
+      }
+    };
+    
+    const interval = setInterval(checkConsent, 1000);
+    window.addEventListener("storage", handleStorageChange);
+    
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      clearInterval(interval);
+    };
   }, []);
 
   const handleClick = () => {
