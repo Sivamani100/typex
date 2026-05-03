@@ -143,8 +143,8 @@ const AdNetwork = ({ type, className = "" }: AdNetworkProps) => {
       <div
         className={`
           relative flex items-center justify-center
-          border-2 border-dashed border-white/20 
-          bg-white/5 rounded-lg overflow-hidden
+          border-2 border-dashed border-primary/40 
+          bg-slate-800/80 rounded-lg overflow-hidden
           ${className}
         `}
         style={{
@@ -155,17 +155,19 @@ const AdNetwork = ({ type, className = "" }: AdNetworkProps) => {
         aria-label={hasConsent ? "Advertisement" : "Advertisement - Accept cookies to view"}
       >
         <div className="text-center px-4">
-          <p className="text-xs text-muted-foreground/50 uppercase tracking-wider">
-            {hasConsent ? "Advertisement" : "Advertisement (Accept Cookies)"}
+          <p className="text-xs text-primary/80 uppercase tracking-wider font-medium">
+            {hasConsent ? "Advertisement" : "Accept Cookies to View Ads"}
           </p>
           {config.width > 0 && (
-            <p className="text-[10px] text-muted-foreground/30 mt-1">
+            <p className="text-[10px] text-muted-foreground/60 mt-1">
               {config.width}x{config.height}
             </p>
           )}
-          <p className="text-[9px] text-muted-foreground/20 mt-0.5 capitalize">
-            {type.replace(/-/g, " ")}
-          </p>
+          {!hasConsent && (
+            <p className="text-[9px] text-primary/50 mt-2">
+              Click Accept on the cookie banner below
+            </p>
+          )}
         </div>
       </div>
     );
@@ -254,18 +256,23 @@ export const AdContainer = ({
         id={containerId}
         className={`
           relative flex items-center justify-center
-          border-2 border-dashed border-white/20 
-          bg-white/5 rounded-lg
+          border-2 border-dashed border-primary/40 
+          bg-slate-800/80 rounded-lg
           min-w-[300px] min-h-[250px]
           ${className}
         `}
         aria-label={hasConsent ? "Advertisement" : "Advertisement - Accept cookies to view"}
       >
         <div className="text-center">
-          <p className="text-xs text-muted-foreground/50 uppercase tracking-wider">
-            {hasConsent ? "Advertisement" : "Advertisement (Accept Cookies)"}
+          <p className="text-xs text-primary/80 uppercase tracking-wider font-medium">
+            {hasConsent ? "Advertisement" : "Accept Cookies to View"}
           </p>
-          <p className="text-[9px] text-muted-foreground/20 mt-1">ID: {containerId}</p>
+          <p className="text-[10px] text-muted-foreground/60 mt-1">Container: {containerId.slice(-8)}</p>
+          {!hasConsent && (
+            <p className="text-[9px] text-primary/50 mt-2">
+              Click Accept below
+            </p>
+          )}
         </div>
       </div>
     );
