@@ -4,6 +4,7 @@ import { BookOpen, Home, Clock, ArrowLeft, User, Calendar as CalendarIcon, Share
 import MetaTags, { createBreadcrumbSchema, createArticleSchema, createFAQSchema } from "@/seo/MetaTags";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import AdUnit from "@/components/AdUnit";
+import AdNetwork, { AdContainer, AdDirectLink } from "@/components/AdNetwork";
 import { getPostBySlug, getRelatedPosts, type BlogPost, generateTableOfContents, extractFAQs } from "@/blog/loader";
 
 const BlogPost = () => {
@@ -246,6 +247,14 @@ const BlogPost = () => {
                       </span>
                     )}
                   </button>
+                  <div className="ml-auto">
+                    <AdDirectLink />
+                  </div>
+                </div>
+
+                {/* Top Banner Ad - Before Article */}
+                <div className="mb-8 flex justify-center">
+                  <AdNetwork type="profitable-cpm-leaderboard" />
                 </div>
 
                 {/* Article Content */}
@@ -266,9 +275,30 @@ const BlogPost = () => {
                   dangerouslySetInnerHTML={{ __html: post.html }}
                 />
 
-                {/* Ad Unit - Below blog post content */}
-                <div className="mt-8 flex justify-center">
-                  <AdUnit size="leaderboard" slot="blog-post-bottom" />
+                {/* Mid-Article Ad Section */}
+                <div className="my-12 glass rounded-xl border border-white/5 p-6">
+                  <h3 className="text-sm font-medium text-center text-muted-foreground mb-4 uppercase tracking-wider">
+                    Sponsored
+                  </h3>
+                  <div className="flex flex-wrap justify-center gap-6">
+                    <AdContainer containerId="container-0bb4c5329cf485af7b48c6ba21661f31" />
+                    <div className="hidden md:block">
+                      <AdNetwork type="profitable-cpm-rectangle" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Ad Units - Below blog post content */}
+                <div className="mt-8 space-y-6">
+                  <div className="flex justify-center">
+                    <AdUnit size="leaderboard" slot="blog-post-bottom" />
+                  </div>
+                  <div className="flex justify-center">
+                    <AdNetwork type="profitable-cpm-banner" />
+                  </div>
+                  <div className="flex justify-center md:hidden">
+                    <AdNetwork type="profitable-cpm-mobile" />
+                  </div>
                 </div>
 
                 {/* Related Posts */}
