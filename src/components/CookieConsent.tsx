@@ -37,6 +37,8 @@ const CookieConsent = () => {
   const handleClose = () => {
     setIsVisible(false);
     setTimeout(() => setShowBanner(false), 300);
+    // Store that user dismissed without accepting - they'll see it again next session
+    localStorage.setItem("cookieBannerDismissed", new Date().toISOString());
   };
 
   if (!showBanner) return null;

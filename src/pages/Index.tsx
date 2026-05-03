@@ -76,8 +76,8 @@ const Index = () => {
       <h1 className="sr-only">Typex — Online Typing Test for Speed and Accuracy</h1>
       
       {/* Top Banner Ad - Leaderboard */}
-      <div className="w-full flex justify-center py-4 px-4">
-        <AdNetwork type="profitable-cpm-leaderboard" />
+      <div className="w-full flex justify-center py-4 px-4 min-h-[100px]">
+        <AdNetwork type="profitable-cpm-leaderboard" className="w-full max-w-[728px]" />
       </div>
       
       <TypingTest />
@@ -86,8 +86,8 @@ const Index = () => {
       <section className="w-full max-w-[1200px] mx-auto px-6 sm:px-14 py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Left Skyscraper */}
-          <div className="hidden md:flex justify-center">
-            <AdNetwork type="profitable-cpm-skyscraper" />
+          <div className="hidden md:flex justify-center min-h-[310px]">
+            <AdNetwork type="profitable-cpm-skyscraper" className="w-[160px] h-[300px]" />
           </div>
           
           {/* Center Content */}
@@ -99,8 +99,8 @@ const Index = () => {
           </div>
           
           {/* Right Skyscraper */}
-          <div className="hidden md:flex justify-center">
-            <AdNetwork type="profitable-cpm-rectangle" />
+          <div className="hidden md:flex justify-center min-h-[260px]">
+            <AdNetwork type="profitable-cpm-rectangle" className="w-[300px] h-[250px]" />
           </div>
         </div>
       </section>
@@ -108,8 +108,8 @@ const Index = () => {
       <FAQSection />
       
       {/* FAQ Bottom Ad */}
-      <div className="w-full flex justify-center py-6 px-4">
-        <AdNetwork type="profitable-cpm-banner" />
+      <div className="w-full flex justify-center py-6 px-4 min-h-[80px]">
+        <AdNetwork type="profitable-cpm-banner" className="w-full max-w-[468px]" />
       </div>
       
       <BlogLinksSection />
@@ -118,15 +118,15 @@ const Index = () => {
       <section className="w-full max-w-[1000px] mx-auto px-6 sm:px-14 py-8">
         <div className="glass rounded-xl border border-white/5 p-6">
           <h3 className="text-lg font-medium text-center mb-4">Sponsored</h3>
-          <div className="flex flex-wrap justify-center gap-4">
-            <AdContainer containerId="container-0bb4c5329cf485af7b48c6ba21661f31" />
+          <div className="flex flex-wrap justify-center gap-4 min-h-[260px]">
+            <AdContainer containerId="container-0bb4c5329cf485af7b48c6ba21661f31" className="w-[300px] h-[250px]" />
           </div>
         </div>
       </section>
       
       {/* Bottom Mobile Banner */}
-      <div className="w-full flex justify-center py-4 px-4 md:hidden">
-        <AdNetwork type="profitable-cpm-mobile" />
+      <div className="w-full flex justify-center py-4 px-4 md:hidden min-h-[60px]">
+        <AdNetwork type="profitable-cpm-mobile" className="w-full max-w-[320px]" />
       </div>
     </>
   );

@@ -179,17 +179,37 @@ const AdNetwork = ({ type, className = "" }: AdNetworkProps) => {
     return null;
   }
 
+  // Always show container with dimensions, ad script will populate it
   return (
     <div
       ref={containerRef}
-      className={`ad-container ${className}`}
+      className={`
+        ad-container relative
+        flex items-center justify-center
+        border border-white/10 bg-black/20 rounded-lg
+        overflow-hidden
+        ${className}
+      `}
       style={{
-        width: config.width,
-        height: config.height,
+        width: config.width > 0 ? config.width : "100%",
+        height: config.height > 0 ? config.height : 90,
         maxWidth: "100%",
       }}
       data-ad-type={type}
-    />
+    >
+      {!isLoaded && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center">
+            <p className="text-[10px] text-muted-foreground/40 uppercase tracking-wider">
+              Loading Ad...
+            </p>
+            <p className="text-[9px] text-muted-foreground/20 mt-1">
+              {config.width}x{config.height}
+            </p>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 
